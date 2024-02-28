@@ -57,7 +57,7 @@ public class AddressHelper {
 
 		
 		
-		//KEEP FINISHING THIS//
+		//KEEP FINISHING THIS//s
 		
 		// we only want one result
 		typedQuery.setMaxResults(1);
