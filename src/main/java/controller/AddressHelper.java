@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import model.Address;
-import model.ListItem;
+
 
 
 /**
