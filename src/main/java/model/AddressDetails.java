@@ -64,6 +64,8 @@ public class AddressDetails {
 		this.printDate = printDate;
 		this.contact = contact;
 	}
+	
+	
 
 
 	//Getter and Setter methods

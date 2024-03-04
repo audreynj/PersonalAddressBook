@@ -18,69 +18,68 @@ public class Contact {
 
 	@Id
 	@GeneratedValue
-	@Column(name="ID")
-	private int ContactID;
+	private int contactID;
 	
-	@Column(name="FNAME")
-	private String fName;
+	private String ownerName;
 	
-	@Column(name="LNAME")
-	private String lName;
-	
-	@Column(name="PHONENUM")
-	private int PhoneNum;
+	private String phoneNum;
 
 
 	//Getter and Setters
 	public int getContactID() {
-		return ContactID;
+		return contactID;
 	}
 	public void setContactID(int contactID) {
-		ContactID = contactID;
+		this.contactID = contactID;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 
 
-	public String getfName() {
-		return fName;
-	}
-	public void setfName(String fName) {
-		this.fName = fName;
-	}
 
 
-	public String getlName() {
-		return lName;
-	}
-	public void setlName(String lName) {
-		this.lName = lName;
-	}
 
-
-	public int getPhoneNum() {
-		return PhoneNum;
+	public String getPhoneNum() {
+		return phoneNum;
 	}
-	public void setPhoneNum(int phoneNum) {
-		PhoneNum = phoneNum;
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
 	}
 
 	//Constructors
-	public Contact(int contactID, String fName, String lName, int phoneNum) {
-		super();
-		this.ContactID = contactID;
-		this.fName = fName;
-		this.lName = lName;
-		this.PhoneNum = phoneNum;
-	}
-	
 	public Contact() {
 		super();
 		
 	}
 	
+	public Contact(int contactID, String ownerName, String phoneNum) {
+		super();
+		this.contactID = contactID;
+		this.ownerName = ownerName;
+		this.phoneNum = phoneNum;
+	}
+	
+	public Contact(String ownerName, String phoneNum) {
+		super();
+		this.ownerName = ownerName;
+		this.phoneNum = phoneNum;
+	}
+	
+	public Contact(String ownerName) {
+		super();
+		this.ownerName = ownerName;
+	}
+	
+	
 	
 	@Override
 	public String toString() {
-		return "Owner: " + this.fName + " " + this.lName + " Phone Number: " + this.PhoneNum;
+		return "Owner: " + this.ownerName + " Phone Number: " + this.phoneNum;
 	}
 	
 	

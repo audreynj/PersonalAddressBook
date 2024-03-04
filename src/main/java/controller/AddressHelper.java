@@ -12,6 +12,7 @@ import model.Address;
 
 
 
+
 /**
  * Audrey N. Johnston - ajohnston10
  * CIS175
@@ -21,7 +22,7 @@ public class AddressHelper {
 
 	static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("AddressBook");
 
-	public void insertItem(Address ad) {
+	public void insertAddress(Address ad) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(ad);
@@ -32,7 +33,7 @@ public class AddressHelper {
 	
 	public List<Address> showAllAddresses(){
 		EntityManager em = emfactory.createEntityManager();
-		List<Address> allAddresses = em.createQuery("SELECT i FROM Addresses i").getResultList();
+		List<Address> allAddresses = em.createQuery("SELECT i FROM Address i").getResultList();
 		
 		return allAddresses;
 	}
@@ -44,20 +45,15 @@ public class AddressHelper {
 		em.getTransaction().begin();
 		TypedQuery<Address> typedQuery = em.createQuery(
 				"select ad from Address ad where"
-				+ " ad.StreetName = :selectedStreetName"
-				+ " and ad.OwnerName = :selectedOwnerName"
-				+ " and ad.zip = :selectedzip"
-				+ " and ad.HouseNumber = :selectedHouseNumber",
+				+ " ad.streetName = :selectedStreetName"
+				+ " and ad.zip = :selectedZip"
+				+ " and ad.houseNumber = :selectedHouseNumber",
 				Address.class);
 		// Substitute parameter with actual data from the toDelete item
 		typedQuery.setParameter("selectedStreetName", toDelete.getStreetName());
-		typedQuery.setParameter("selectedOwnerName", toDelete.getOwnerName());
-		typedQuery.setParameter("selectedzip", toDelete.getZip());
+		typedQuery.setParameter("selectedZip", toDelete.getZip());
 		typedQuery.setParameter("selectedHouseNumber", toDelete.getHouseNumber());
 
-		
-		
-		//KEEP FINISHING THIS//s
 		
 		// we only want one result
 		typedQuery.setMaxResults(1);
@@ -69,6 +65,68 @@ public class AddressHelper {
 		em.remove(result);
 		em.getTransaction().commit();
 		em.close();
+	}
+	
+	public Address searchForAddressById(int idToEdit) {
+		// TODO Auto-generated method stub
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		Address found = em.find(Address.class, idToEdit);
+		em.close();
+		return found;
+	}
+
+	public void updateAddress(Address toEdit) {
+		// TODO Auto-generated method stub
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		
+		em.merge(toEdit);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	
+	public List<Address> searchForAddressByStreetName(String streetName) {
+		// TODO Auto-generated method stub
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Address> typedQuery = em.createQuery("select ad from Address ad where ad.StreetName = :selectedStreetName", Address.class);
+		typedQuery.setParameter("selectedStreetName", streetName);
+
+		List<Address> foundItems = typedQuery.getResultList();
+		em.close();
+		return foundItems;
+	}
+
+	
+	public List<Address> searchForAddressByZip(String zip) {
+		// TODO Auto-generated method stub
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Address> typedQuery = em.createQuery("select ad from Address ad where ad.Zip = :selectedZip", Address.class);
+		typedQuery.setParameter("selectedZip", zip);
+
+		List<Address> foundItems = typedQuery.getResultList();
+		em.close();
+		return foundItems;
+	}
+	
+	public List<Address> searchForAddressByHouseNumber(String houseNumber) {
+		// TODO Auto-generated method stub
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Address> typedQuery = em.createQuery("select ad from Address ad where ad.HouseNumber = :selectedHouseNumber", Address.class);
+		typedQuery.setParameter("selectedHouseNumber", houseNumber);
+
+
+		List<Address> foundItems = typedQuery.getResultList();
+		em.close();
+		return foundItems;
+	}
+	
+	public void cleanUp(){
+		emfactory.close();
 	}
 	
 }

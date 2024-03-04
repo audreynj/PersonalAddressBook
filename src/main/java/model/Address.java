@@ -18,43 +18,33 @@ public class Address {
 	@Id
 	@GeneratedValue
 	@Column(name="ID")
-	private int AddressID;
+	private int addressID;
 	
 	@Column(name="STREETNAME")
-	private String StreetName;
+	private String streetName;
 	
-	@Column(name="OWNERNAME")
-	private String OwnerName;
 	
 	@Column(name="ZIP")
 	private String zip;
 	
 	@Column(name="HOUSENUMBER")
-	private String HouseNumber;
+	private String houseNumber;
 
 
 	//Getters and Setters
 	public int getAddressID() {
-		return AddressID;
+		return addressID;
 	}
 	public void setAddressID(int addressID) {
-		AddressID = addressID;
+		this.addressID = addressID;
 	}
 
 
 	public String getStreetName() {
-		return StreetName;
+		return streetName;
 	}
 	public void setStreetName(String streetName) {
-		StreetName = streetName;
-	}
-
-
-	public String getOwnerName() {
-		return OwnerName;
-	}
-	public void setOwnerName(String ownerName) {
-		OwnerName = ownerName;
+		this.streetName = streetName;
 	}
 
 
@@ -66,10 +56,10 @@ public class Address {
 	}
 
 	public String getHouseNumber() {
-		return HouseNumber;
+		return houseNumber;
 	}
 	public void setHouseNumber(String houseNumber) {
-		HouseNumber = houseNumber;
+		this.houseNumber = houseNumber;
 	}
 
 	//Constructor
@@ -77,17 +67,16 @@ public class Address {
 		super();
 	}
 	
-	public Address(String streetName, String ownerName, String zip, String houseNumber) {
+	public Address(String streetName, String zip, String houseNumber) {
 		super();
-		this.StreetName = streetName;
-		this.OwnerName = ownerName;
+		this.streetName = streetName;
 		this.zip = zip;
-		this.HouseNumber = houseNumber;
+		this.houseNumber = houseNumber;
 	}
 	
 	
 	public String returnAddressDetails() {
-		return this.HouseNumber + " "+  this.StreetName + ": " + this.zip + " Owner: " + this.OwnerName;
+		return this.houseNumber + " "+  this.streetName + ": " + this.zip;
 	}
 	
 	
